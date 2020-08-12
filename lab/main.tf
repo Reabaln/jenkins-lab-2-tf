@@ -186,7 +186,7 @@ resource "aws_instance" "webserver" {
   provisioner "local-exec" {
     command = "echo ${aws_instance.api.0.public_ip} > ip_address.txt"
 }
-
+}
 resource "aws_instance" "bastion" {
   ami                    = "ami-02c7c728a7874ae7a"
   instance_type          = "t3.micro"
