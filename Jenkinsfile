@@ -16,11 +16,6 @@ pipeline {
   }
   stages {
       
-stage("down"){
-steps {
-sh 'make down' 
-}
-}
 
       stage("init") {
           steps {
