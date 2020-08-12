@@ -162,7 +162,7 @@ resource "aws_route53_record" "webserver" {
   records = [aws_instance.webserver.0.private_ip]
 }
 
-resource "aws_instance" "webserver" {
+resource "aws_instance" "api" {
   count                       = 1
   ami                         = data.aws_ami.latest_webserver.id
   instance_type               = var.instance_type
@@ -172,6 +172,19 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = true
   tags                        = module.tags_webserver.tags
 }
+
+resource "aws_instance" "webserver" {
+  count                       = 1
+  ami                         = data.aws_ami.latest_webserver.id
+  instance_type               = var.instance_type
+  subnet_id                   = aws_subnet.webserver[count.index].id
+  vpc_security_group_ids      = [aws_security_group.webserver.id]
+  key_name                    = aws_key_pair.lab_keypair.id
+  associate_public_ip_address = true
+  tags                        = module.tags_webserver.tags
+  depends_on 		      = [aws_instance.api.id]
+}
+
 
 resource "aws_instance" "bastion" {
   ami                    = "ami-02c7c728a7874ae7a"
