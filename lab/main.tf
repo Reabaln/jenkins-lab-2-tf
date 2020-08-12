@@ -58,14 +58,7 @@ resource "aws_vpc" "lab" {
   enable_dns_hostnames = true
 }
 
-resource "aws_route53_zone" "reab_dobc" {
-  name = "reab.dobc"
-  tags = module.tags_network.tags
 
-  vpc {
-    vpc_id = aws_vpc.lab.id
-  }
-}
 
 resource "aws_internet_gateway" "lab_gateway" {
   vpc_id = aws_vpc.lab.id
@@ -157,13 +150,6 @@ resource "aws_key_pair" "lab_keypair" {
   public_key = random_id.keypair.keepers.public_key
 }
 
-resource "aws_route53_record" "webserver" {
-  zone_id = aws_route53_zone.reab_dobc.id
-  name    = "webserver"
-  type    = "A"
-  ttl     = 300
-  records = [aws_instance.webserver.0.private_ip]
-}
 
 resource "aws_instance" "api" {
   count                       = 1
