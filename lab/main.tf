@@ -182,7 +182,7 @@ resource "aws_instance" "webserver" {
   key_name                    = aws_key_pair.lab_keypair.id
   associate_public_ip_address = true
   tags                        = module.tags_webserver.tags
-  depends_on 		      = [aws_instance.api.id]
+  depends_on 		      = [aws_instance.api]
 }
 
 
