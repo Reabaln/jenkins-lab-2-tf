@@ -1,4 +1,6 @@
-provider "aws" {}
+provider "aws" {
+alias = "test"
+}
 
 module "tags_network" {
   source      = "git::https://github.com/cloudposse/terraform-null-label.git"
