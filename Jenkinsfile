@@ -18,7 +18,7 @@ pipeline {
       
 stage("down"){
 steps {
-sh 'make destroy' 
+sh 'make down' 
 }
 }
 
