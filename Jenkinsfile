@@ -15,6 +15,13 @@ pipeline {
     TF_NAMESPACE="reab"
   }
   stages {
+      
+stage("down"){
+steps {
+sh 'make destroy' 
+}
+}
+
       stage("init") {
           steps {
               sh 'make init'
