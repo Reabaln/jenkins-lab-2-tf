@@ -1,5 +1,6 @@
 provider "aws" {
 alias = "test"
+region = "me-south-a1"
 }
 
 module "tags_network" {
