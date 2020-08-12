@@ -10,7 +10,7 @@ variable "public_key_path" {
 
 variable "key_name" {
   description = "master key for the lab"
-  default     = "lab-key"
+  default     = "reab"
 }
 
 variable "name" {

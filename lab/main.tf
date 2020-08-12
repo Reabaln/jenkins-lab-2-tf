@@ -55,8 +55,8 @@ resource "aws_vpc" "lab" {
   enable_dns_hostnames = true
 }
 
-resource "aws_route53_zone" "bryan_dobc" {
-  name = "bryan.dobc"
+resource "aws_route53_zone" "reab_dobc" {
+  name = "reab.dobc"
   tags = module.tags_network.tags
 
   vpc {
@@ -155,7 +155,7 @@ resource "aws_key_pair" "lab_keypair" {
 }
 
 resource "aws_route53_record" "webserver" {
-  zone_id = aws_route53_zone.bryan_dobc.id
+  zone_id = aws_route53_zone.reab_dobc.id
   name    = "webserver"
   type    = "A"
   ttl     = 300
@@ -184,7 +184,6 @@ resource "aws_instance" "webserver" {
   tags                        = module.tags_webserver.tags
   depends_on 		      = [aws_instance.api]
 }
-
 
 resource "aws_instance" "bastion" {
   ami                    = "ami-02c7c728a7874ae7a"
