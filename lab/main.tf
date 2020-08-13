@@ -187,7 +187,7 @@ resource "aws_instance" "webserver" {
   tags                        = module.tags_webserver.tags
   depends_on 		      = [aws_instance.api]
   provisioner "local-exec" {
-    command = "echo ${aws_instance.api.0.public_ip} > ip.txt"
+    command = "echo ${aws_instance.api.0.public_ip} > index.html"
 }
 }
 resource "aws_instance" "bastion" {
