@@ -15,7 +15,7 @@ start:
 		   --hostname "$$(basename $$PWD)" \
 		   --name "$$(basename $$PWD)" \
 		   -w /$$(basename $$PWD) \
-		   bryandollery/terraform-packer-aws-alpine bash
+		   bryandollery/terraform-packer-aws-alpine 
 
 exec:
 	docker exec -it "$$(basename $$PWD)" bash || true
@@ -48,5 +48,5 @@ connect:
 init:
 	rm -rf .terraform ssh
 	mkdir ssh
-	time terraform init -backend-config="bucket=devops-bootcamp-remote-state-$$TF_NAMESPACE" -backend-config="key=$$TF_NAMESPACE/labs/terraform.tfstate" -backend-config="dynamodb_table=devops-bootcamp-locks-$$TF_NAMESPACE"
+	time terraform init -backend-config="bucket=devops-bootcamp-remote-state-$$TF_NAMESPACE" -backend-config="key=$$TF_NAMESPACE/labs/terraform.tfstate" -backend-config="dynamodb_table=devops-bootcamp-locks-$$TF_NAMESPACE" -lock=false
 	ssh-keygen -t rsa -f ./ssh/id_rsa -q -N ""

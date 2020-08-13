@@ -1,7 +1,4 @@
-provider "aws" {
-alias = "test"
-region = "me-south-a1"
-}
+provider "random" {}
 
 module "tags_network" {
   source      = "git::https://github.com/cloudposse/terraform-null-label.git"
@@ -173,7 +170,7 @@ resource "aws_instance" "webserver" {
   tags                        = module.tags_webserver.tags
   depends_on 		      = [aws_instance.api]
   provisioner "local-exec" {
-    command = "echo ${aws_instance.api.0.public_ip} > ip_address.txt"
+    command = "echo ${aws_instance.api.0.public_ip} > ip.txt"
 }
 }
 resource "aws_instance" "bastion" {
