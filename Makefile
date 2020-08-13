@@ -27,10 +27,10 @@ fmt:
 	time terraform fmt -recursive
 
 plan:
-	time terraform plan -out plan.out -var-file=terraform.tfvars -lock=false
+	time terraform plan -out plan.out -var-file=terraform.tfvars 
 
 apply:
-	time terraform apply plan.out -lock=false
+	time terraform apply plan.out 
 
 down:
 	time terraform destroy -auto-approve 
@@ -48,4 +48,5 @@ connect:
 init:
 	rm -rf .terraform ssh
 	mkdir ssh
-	time terraform init -lock=false
+		time terraform init -backend-config="bucket=devops-bootcamp-remote-state-$$TF_NAMESPACE" -backend-config="key=$$TF_NAMESPACE/labs/terraform.tfstate" -backend-config="dynamodb_table=devops-bootcamp-locks-$$TF_NAMESPACE"
+	ssh-keygen -t rsa -f ./ssh/id_rsa -q -N ""
